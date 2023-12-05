@@ -3018,7 +3018,7 @@ function Ray2(Position1, Position2)
 	Part.Transparency = 1
 	Part.CanCollide = false
 
-	local Ray = Ray.new(Position1, (Position2 - Position1))
+	local Ray = Ray.new(Position2, (Position1 - Position2))
 	local part = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(Ray, {game.Players.LocalPlayer.Character})
 
 	if part ~= nil and part == Part then
