@@ -3009,6 +3009,29 @@ function GetUnBlockingPlayers(Check, Pos)
 	return Players
 end
 
+function Ray2(Position1, Position2)
+	local Part = Instance.new("Part", workspace)
+	
+	Part.Position = Position2
+	Part.Size = Vector3.new(0.5, 0.5, 0.5)
+	Part.Anchored = true
+	Part.Transparency = 1
+	Part.CanCollide = false
+
+	local Ray = Ray.new(Position1, (Position2 - Position1))
+	local part = game:GetService("Workspace"):FindPartOnRayWithIgnoreList(Ray, {game.Players.LocalPlayer.Character})
+
+	if part ~= nil and part == Part then
+		Part:Destroy()
+		
+		return true
+	else
+		Part:Destroy()
+		
+		return false
+	end
+end
+
 function GetPlayer(String, Information)
 	local Info = {
 		["raycasting"] = false,
@@ -3025,34 +3048,35 @@ function GetPlayer(String, Information)
 	end
 	local players = {}
 	if Info["raycasting"] == true and Info["team"] == true then
-		players1 = GetUnBlockingPlayers(true, Info["Position"])
+		players1 = GetUnBlockingPlayers(true, Info["position"])
 		for i, v in pairs(players1) do
-			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["Distance"] then
+			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
 				table.insert(players, v)
 			end
 		end
 	elseif Info["raycasting"] == true and Info["team"] == false then
-		players1 = GetUnBlockingPlayers(false, Info["Position"])
+		players1 = GetUnBlockingPlayers(false, Info["position"])
 		for i, v in pairs(players1) do
-			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["Distance"] then
+			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
 				table.insert(players, v)
 			end
 		end
 	elseif Info["team"] == true and Info["raycasting"] == false then
 		players1 = GetPlayersTeam()
 		for i, v in pairs(players1) do
-			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["Distance"] then
+			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
 				table.insert(players, v)
 			end
 		end
 	else
 		players1 = game:GetService("Players"):GetPlayers()
 		for i, v in pairs(players1) do
-			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["Distance"] then
+			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
 				table.insert(players, v)
 			end
 		end
 	end
+
 	local Found = {}
 	local strl = String:lower()
 	if strl == "" then
