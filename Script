@@ -3009,7 +3009,7 @@ function GetUnBlockingPlayers(Check, Pos)
 	return Players
 end
 
-function getPlayer(String, Information)
+function GetPlayer(String, Information)
 	local Info = {
 		["raycasting"] = false,
 		["team"] = false,
