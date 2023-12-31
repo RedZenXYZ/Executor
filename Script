@@ -54,6 +54,10 @@ local UICorner12 = Instance.new("UICorner", DownArrow)
 local UICorner13 = Instance.new("UICorner", LeftArrow)
 local UICorner14 = Instance.new("UICorner", RightArrow)
 local UICorner15 = Instance.new("UICorner", Number)
+local UICorner16 = Instance.new("UICorner", ReplaceTextBox1)
+local UICorner17 = Instance.new("UICorner", ReplaceTextBox2)
+local UICorner18 = Instance.new("UICorner", Enter)
+
 _G.Lines = true
 _G.HideLines = false
 _G.Tips = true
@@ -2333,7 +2337,20 @@ Enter.TextColor3 = Color3.new(1, 1, 1)
 Enter.TextScaled = true
 Enter.Text = "Enter"
 Enter.MouseButton1Click:Connect(function()
-	Replace(ReplaceTextBox1.Text, ReplaceTextBox2.Text)
+	if Enter.Text == "Enter" then
+		Enter.Text = "Are You Sure?"
+		Enter.BackgroundColor3 = Color3.new(0, 1, 0)
+		Enter.TextColor3 = Color3.new(0, 0, 0)
+		wait(1)
+		Enter.BackgroundColor3 = Color3.new(0.0784314, 0.0784314, 0.117647)
+		Enter.TextColor3 = Color3.new(1, 1, 1)
+		Enter.Text = "Enter"
+	elseif Enter.Text == "Are You Sure?" then
+		Enter.BackgroundColor3 = Color3.new(0.0784314, 0.0784314, 0.117647)
+		Enter.TextColor3 = Color3.new(1, 1, 1)
+		Enter.Text = "Enter"
+		Replace(ReplaceTextBox1.Text, ReplaceTextBox2.Text)
+	end
 end)
 
 ScrollFrame.Name = "ScrollingFrame"
