@@ -2157,7 +2157,7 @@ ReplaceTextButton.MouseButton1Click:Connect(function()
 	ReplaceTextFrame.Visible = not ReplaceTextFrame.Visible
 	if ReplaceTextFrame.Visible == true then
 		ReplaceTextButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-	else
+	elseif ReplaceTextFrame.Visible == false then
 		ReplaceTextButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 	end
 end)
