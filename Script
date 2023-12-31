@@ -29,7 +29,7 @@ local ReplaceTextButton = Instance.new("TextButton")
 local ReplaceTextFrame = Instance.new("Frame", Frame)
 local ReplaceTextBox1 = Instance.new("TextBox", ReplaceTextFrame)
 local ReplaceTextBox2 = Instance.new("TextBox", ReplaceTextFrame)
-local ReplaceTextEnter = Instance.new("TextButton", ReplaceTextFrame)
+local Enter = Instance.new("TextButton", ReplaceTextFrame)
 local AddToScriptsHub = Instance.new("TextButton")
 local MoveScrollingFrameButton = Instance.new("TextButton")
 local MoveScrollingFrame = Instance.new("Frame", Frame)
@@ -2308,8 +2308,30 @@ ReplaceTextFrame.BackgroundTransparency = 0.3
 ReplaceTextFrame.Active = true
 ReplaceTextFrame.Visible = false
 
-ReplaceTextBox1.Name = "ReplaceTextBox1"
+ReplaceTextBox1.Size = UDim2.new(0, 150, 0, 50)
+ReplaceTextBox1.Position = UDim2.new(0, 50, 0, 30)
+ReplaceTextBox1.BackgroundColor3 = Color3.new(0.0784314, 0.0784314, 0.117647)
+ReplaceTextBox1.TextColor3 = Color3.new(1, 1, 1)
+ReplaceTextBox1.PlaceholderColor3 = Color3.new(1, 1, 1)
+ReplaceTextBox1.TextScaled = true
+ReplaceTextBox1.Text = ""
+ReplaceTextBox1.PlaceholderText = "First Text"
 
+ReplaceTextBox2.Size = UDim2.new(0, 150, 0, 50)
+ReplaceTextBox2.Position = UDim2.new(0, 230, 0, 30)
+ReplaceTextBox2.BackgroundColor3 = Color3.new(0.0784314, 0.0784314, 0.117647)
+ReplaceTextBox2.TextColor3 = Color3.new(1, 1, 1)
+ReplaceTextBox2.PlaceholderColor3 = Color3.new(1, 1, 1)
+ReplaceTextBox2.TextScaled = true
+ReplaceTextBox2.Text = ""
+ReplaceTextBox2.PlaceholderText = "Replace With"
+
+Enter.Size = UDim2.new(0, 175, 0, 50)
+Enter.Position = UDim2.new(0, 120, 0, 125)
+Enter.BackgroundColor3 = Color3.new(0.0784314, 0.0784314, 0.117647)
+Enter.TextColor3 = Color3.new(1, 1, 1)
+Enter.TextScaled = true
+Enter.Text = "Enter"
 
 ScrollFrame.Name = "ScrollingFrame"
 ScrollFrame.Size = UDim2.new(0, 400, 0, 200)
