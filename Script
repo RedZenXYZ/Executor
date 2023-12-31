@@ -2332,6 +2332,9 @@ Enter.BackgroundColor3 = Color3.new(0.0784314, 0.0784314, 0.117647)
 Enter.TextColor3 = Color3.new(1, 1, 1)
 Enter.TextScaled = true
 Enter.Text = "Enter"
+Enter.MouseButton1Click:Connect(function()
+	Replace(ReplaceTextBox1.Text, ReplaceTextBox2.Text)
+end)
 
 ScrollFrame.Name = "ScrollingFrame"
 ScrollFrame.Size = UDim2.new(0, 400, 0, 200)
