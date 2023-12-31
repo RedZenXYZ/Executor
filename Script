@@ -3118,7 +3118,7 @@ function GetPlayer(String, Information)
 	else
 		players1 = game:GetService("Players"):GetPlayers()
 		for i, v in pairs(players1) do
-			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
+			if plr.Character and plr.Character:FindFirstChildOfClass("Humanoid") and plr.Character:FindFirstChildOfClass("Humanoid").Health ~= 0 and (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
 				table.insert(players, v)
 			end
 		end
