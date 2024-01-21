@@ -2515,7 +2515,7 @@ function AddScript()
 	for i, tab in pairs(ScriptsTabScrollingFrame:GetChildren()) do
 		if tab:IsA("Frame") and tab:FindFirstChild("TabTextBox") and tab:FindFirstChild("TabTextBox").BackgroundColor3 == Color3.fromRGB(225, 0, 0) then
 			tab:FindFirstChild("TabTextBox").BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-			tab.Active = false
+			tab:FindFirstChild("TabTextBox").Active = false
 		end
 	end
 	for i, source in pairs(ScrollFrame:GetChildren()) do
@@ -2528,7 +2528,7 @@ function AddScript()
 	local Num = 1
 	for _, number in pairs(ScriptsTabScrollingFrame:GetChildren()) do
 		if number:IsA("Frame") then
-			table.insert(Tabs, tonumber(tostring(number.Name:gsub("%D+", ""))))
+			table.insert(Tabs, tonumber(number.Name:gsub("%D+", "")))
 		end
 	end
 	
@@ -2564,7 +2564,7 @@ function AddScript()
 		for i, tab in pairs(ScriptsTabScrollingFrame:GetChildren()) do
 			if tab:IsA("Frame") and tab:FindFirstChild("TabTextBox") and tab:FindFirstChild("TabTextBox").BackgroundColor3 == Color3.fromRGB(225, 0, 0) then
 				tab:FindFirstChild("TabTextBox").BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-				tab.Active = false
+				tab:FindFirstChild("TabTextBox").Active = false
 			end
 		end
 		for i, source in pairs(ScrollFrame:GetChildren()) do
@@ -2580,9 +2580,10 @@ function AddScript()
 	TabTextBox.Name = "TabTextBox"
 	TabTextBox.Size = UDim2.new(0, 60, 0, 20)
 	TabTextBox.Text = Language.Tab .. Num
+	TabTextBox.ClearTextOnFocus = false
 	TabTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 	TabTextBox.TextScaled = true
-	TabTextBox.Active = false
+	TabTextBox.Active = true
 	TabTextBox.BorderSizePixel = 0
 	TabTextBox.BackgroundColor3 = Color3.fromRGB(225, 0, 0)
 	
