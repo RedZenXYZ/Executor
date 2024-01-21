@@ -2032,11 +2032,15 @@ SureBtn("UnAnchored Gui", function()
 end)
 
 BtnScript("Nameless Admin", function()
-	loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Nameless-Admin-10833"))()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source'))()
 end)
 
 BtnScript("Fe Emotes Gui", function()
 	loadstring(game:HttpGet("https://pastebin.com/raw/eCpipCTH"))()
+end)
+
+BtnScript("Find Server", function()
+	loadstring(game:HttpGet("https://www.scriptblox.com/raw/Server-Browser_80", true))();
 end)
 
 ScrollFrame2.Name = "ScrollSettings"
