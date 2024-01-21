@@ -3116,7 +3116,7 @@ end
 
 function Output(...)
 	local Input = {...}
-	local texts
+	local texts = ""
 	
 	for _,text in pairs(Input) do
 		texts = texts .. tostring(text)
