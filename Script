@@ -2528,7 +2528,7 @@ function AddScript()
 	local Num = 1
 	for _, number in pairs(ScriptsTabScrollingFrame:GetChildren()) do
 		if number:IsA("Frame") then
-			table.insert(Tabs, tonumber(number.Name:gsub("%D+", "")))
+			table.insert(Tabs, tonumber(tostring(number.Name:gsub("%D+", ""))))
 		end
 	end
 	
@@ -2547,7 +2547,7 @@ function AddScript()
 	local Source = Instance.new("TextBox", ScrollFrame)
 	_G.CurrentTextBox = Source
 
-	ScriptTab.Name = Num .. "ScriptTab" .. Num
+	ScriptTab.Name = Num .. "ScriptTab"
 	ScriptTab.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	ScriptTab.Size = UDim2.new(0, 80, 0, 20)
 	ScriptTab.BorderSizePixel = 0
