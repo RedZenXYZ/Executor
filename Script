@@ -81,7 +81,7 @@ _G.Tips = true
 	}
 	StringSetting = jsonencode(SettingS)
 	WriteFile("Red Executor/Setting/Settings", StringSetting)
-	WriteFile("Red Executor/Script Tabs/Tab1", "--- Tab : " .. "1" .. '\n--- local functions | Plrs | Plr | Chr | Ws | Bp | CGui | PlrGui\n--- Functions : CheckScriptsInChr() | CheckToolScripts () | Clip("Text") | calculate("stringNumbers") | getHie(Object) | Replace("This", "ToThis") | Fling("Target Name") | Executes(Num, Source) | Output(Object/"Text")\n\n')
+	WriteFile("Red Executor/Script Tabs/Tab1", "--- Tab : " .. "1" .. '\n--- local functions | Plrs | Plr | Chr | Ws | Bp | CGui | PlrGui\n--- Functions : CheckScriptsInChr() | CheckToolScripts () | Clip("Text") | calculate("stringNumbers") | getHie(Object) | Replace("This", "ToThis") | Fling("Target Name") | Executes(Num, Source) | Output(String or "Text")\n\n')
 
 ----- [ Languages ] -----
 
@@ -1884,18 +1884,16 @@ SureBtn("HitBox V1", function()
 	local Red = Instance.new("TextBox")
 	local Green = Instance.new("TextBox")
 	local Blue = Instance.new("TextBox")
-	local TextLabel = Instance.new("TextLabel")
+	local TransparencyNum = Instance.new("TextBox")
+	local Toggle = Instance.new("TextButton")
+	local HitPart = Instance.new("TextButton")
 	
 	FightingGui.Name = "FightingGui"
 	FightingGui.Parent = game.CoreGui
 	FightingGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	
-	Open2.Name = "Tools"
-	Open2.Parent = game.CoreGui
-	Open2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	
 	Open.Name = "Open"
-	Open.Parent = Open2
+	Open.Parent = FightingGui
 	Open.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	Open.Position = UDim2.new(0, 0, 0.451871663, 0)
 	Open.Size = UDim2.new(0, 53, 0, 37)
@@ -1905,8 +1903,10 @@ SureBtn("HitBox V1", function()
 	Open.TextScaled = true
 	Open.TextSize = 14.000
 	Open.TextWrapped = true
-	Open.MouseButton1Down:Connect(function()
-		FightingGui.Enabled = true
+	Open.Visible = false
+	Open.MouseButton1Click:Connect(function()
+		Open.Visible = false
+		main.Visible = true
 	end)
 	
 	Close.Name = "Close"
@@ -1920,8 +1920,9 @@ SureBtn("HitBox V1", function()
 	Close.TextScaled = true
 	Close.TextSize = 14.000
 	Close.TextWrapped = true
-	Close.MouseButton1Down:Connect(function()
-		FightingGui.Enabled = false
+	Close.MouseButton1Click:Connect(function()
+		Open.Visible = true
+		main.Visible = false
 	end)
 	
 	main.Parent = FightingGui
@@ -1951,11 +1952,28 @@ SureBtn("HitBox V1", function()
 	HitBox.Font = Enum.Font.SourceSans
 	HitBox.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
 	HitBox.PlaceholderText = "Hitbox"
-	HitBox.Text = ""
+	HitBox.Text = "10"
 	HitBox.TextColor3 = Color3.fromRGB(0, 0, 0)
 	HitBox.TextScaled = true
 	HitBox.TextSize = 14.000
 	HitBox.TextWrapped = true
+	
+	HitPart.Name = "HitPart"
+	HitPart.Parent = main
+	HitPart.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	HitPart.Position = UDim2.new(0.0586080588, 0, 0.4, 0)
+	HitPart.Size = UDim2.new(0, 80, 0, 50)
+	HitPart.Font = Enum.Font.SourceSans
+	HitPart.Text = "HumanoidRootPart"
+	HitPart.TextColor3 = Color3.fromRGB(0, 0, 0)
+	HitPart.TextScaled = true
+	HitPart.MouseButton1Click:Connect(function()
+		if HitPart.Text == "HumanoidRootPart" then
+			HitPart.Text = "Head"
+		elseif HitPart.Text == "Head" then
+			HitPart.Text = "HumanoidRootPart"
+		end
+	end)
 	
 	Red.Name = "Red"
 	Red.Parent = main
@@ -1981,16 +1999,18 @@ SureBtn("HitBox V1", function()
 	Green.TextColor3 = Color3.fromRGB(0, 0, 0)
 	Green.TextSize = 14.000
 	
-	TextLabel.Parent = main
-	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-	TextLabel.Position = UDim2.new(0.47118023, 0, 0.325791866, 0)
-	TextLabel.Size = UDim2.new(0, 140, 0, 37)
-	TextLabel.Font = Enum.Font.SourceSans
-	TextLabel.Text = "Colors"
-	TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-	TextLabel.TextScaled = true
-	TextLabel.TextSize = 14.000
-	TextLabel.TextWrapped = true
+	TransparencyNum.Parent = main
+	TransparencyNum.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	TransparencyNum.Position = UDim2.new(0.47118023, 0, 0.325791866, 0)
+	TransparencyNum.Size = UDim2.new(0, 140, 0, 37)
+	TransparencyNum.Font = Enum.Font.SourceSans
+	TransparencyNum.Text = "0.8"
+	TransparencyNum.PlaceholderColor3 = Color3.fromRGB(200, 200, 200)
+	TransparencyNum.PlaceholderText = "Transparency Number"
+	TransparencyNum.TextColor3 = Color3.fromRGB(0, 0, 0)
+	TransparencyNum.TextScaled = true
+	TransparencyNum.TextSize = 14
+	TransparencyNum.TextWrapped = true
 	
 	Blue.Name = "Blue"
 	Blue.Parent = main
@@ -2004,17 +2024,100 @@ SureBtn("HitBox V1", function()
 	Blue.TextColor3 = Color3.fromRGB(0, 0, 0)
 	Blue.TextSize = 14.000
 	
-	game:GetService('RunService').RenderStepped:connect(function()
-		for i,v in next, game:GetService('Players'):GetPlayers() do
-			if v.Name ~= game:GetService('Players').LocalPlayer.Name then
-				v.Character.HumanoidRootPart.Size = Vector3.new(HitBox.Text,HitBox.Text,HitBox.Text)
-				v.Character.HumanoidRootPart.Transparency = 0.8
-				v.Character.HumanoidRootPart.Color = Color3.new(Red.Text,Green.Text,Blue.Text)
-				v.Character.HumanoidRootPart.Material = "Neon"
-				v.Character.HumanoidRootPart.CanCollide = false
-			end
+	Toggle.Parent = main
+	Toggle.Name = "Toggle"
+	Toggle.Size = UDim2.new(0, 100, 0, 40)
+	Toggle.Position = UDim2.new(0.05, 0, 0.75, 0)
+	Toggle.Text = "Hitbox (Off)"
+	Toggle.TextColor3 = Color3.fromRGB(0, 0, 0)
+	Toggle.TextScaled = true
+	Toggle.TextSize = 20
+	Toggle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	Toggle.BackgroundTransparency = 0
+	Toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Toggle.BorderSizePixel = 1
+	Toggle.Visible = true
+	Toggle.MouseButton1Click:Connect(function()
+		if Toggle.Text == "Hitbox (Off)" then
+			Toggle.Text = "Hitbox (On)"
+			Toggle.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+			
+			_G.Hitbox = true
+			ToggleHitbox()
+		elseif Toggle.Text == "Hitbox (On)" then
+			Toggle.Text = "Hitbox (Off)"
+			Toggle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+			
+			_G.Hitbox = false
+			wait()
+			ToNormalHead()
+			ToNormalHumanoidRootPart()
 		end
 	end)
+	
+	function ToggleHitbox()
+		while _G.Hitbox == true do wait()
+			CreateHitbox()
+		end
+	end
+	
+	function CreateHitbox()
+		spawn(function()
+			pcall(function()
+				if HitPart.Text == "Head" then
+					ToNormalHumanoidRootPart()
+					for i,v in next, game:GetService('Players'):GetPlayers() do
+						if v.Name ~= game:GetService('Players').LocalPlayer.Name and v.Character and v.Character:FindFirstChild("Head") then
+							v.Character.Head.Size = Vector3.new(HitBox.Text,HitBox.Text,HitBox.Text)
+							v.Character.Head.Transparency = TransparencyNum.Text
+							v.Character.Head.Color = Color3.new(Red.Text,Green.Text,Blue.Text)
+							v.Character.Head.Material = "Neon"
+							v.Character.Head.CanCollide = false
+						end
+					end
+				elseif HitPart.Text == "HumanoidRootPart" then
+					ToNormalHead()
+					for i,v in next, game:GetService('Players'):GetPlayers() do
+						if v.Name ~= game:GetService('Players').LocalPlayer.Name and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+							v.Character.HumanoidRootPart.Size = Vector3.new(HitBox.Text,HitBox.Text,HitBox.Text)
+							v.Character.HumanoidRootPart.Transparency = TransparencyNum.Text
+							v.Character.HumanoidRootPart.Color = Color3.new(Red.Text,Green.Text,Blue.Text)
+							v.Character.HumanoidRootPart.Material = "Neon"
+							v.Character.HumanoidRootPart.CanCollide = false
+						end
+					end
+				end
+			end)
+		end)
+	end
+	
+	function ToNormalHead()
+		spawn(function()
+			pcall(function()
+				for i,v in next, game:GetService('Players'):GetPlayers() do
+					if v.Name ~= game:GetService('Players').LocalPlayer.Name and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+						v.Character.Head.Size = Vector3.new(1, 1, 1)
+						v.Character.Head.Transparency = 0
+						v.Character.Head.CanCollide = false
+					end
+				end
+			end)
+		end)
+	end
+	
+	function ToNormalHumanoidRootPart()
+		spawn(function()
+			pcall(function()
+				for i,v in next, game:GetService('Players'):GetPlayers() do
+					if v.Name ~= game:GetService('Players').LocalPlayer.Name and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+						v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+						v.Character.HumanoidRootPart.Transparency = 1
+						v.Character.HumanoidRootPart.CanCollide = false
+					end
+				end
+			end)
+		end)
+	end
 end)
 
 BtnScript("Script Searcher", function()
@@ -2437,6 +2540,7 @@ function AddScript()
 	local Num = tostring(Num)
 	
 	local ScriptTab = Instance.new("Frame", ScriptsTabScrollingFrame)
+	local TabTextBox = Instance.new("TextBox", ScriptTab)
 	local TabBtn = Instance.new("TextButton", ScriptTab)
 	local Close = Instance.new("TextButton", ScriptTab)
 	local Source = Instance.new("TextBox", ScrollFrame)
@@ -2450,17 +2554,16 @@ function AddScript()
 
 	TabBtn.Name = "TabBtn"
 	TabBtn.Size = UDim2.new(0, 60, 0, 20)
-	TabBtn.Text = Language.Tab .. Num
-	TabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-	TabBtn.TextScaled = true
+	TabBtn.Text = ""
 	TabBtn.Active = false
 	TabBtn.BorderSizePixel = 0
-	TabBtn.BackgroundColor3 = Color3.fromRGB(225, 0, 0)
+	TabBtn.BackgroundTransparency = 1
 	TabBtn.MouseButton1Click:Connect(function()
 		_G.CurrentTextBox = Source
 		for i, tab in pairs(ScriptsTabScrollingFrame:GetChildren()) do
-			if tab:IsA("Frame") and tab:FindFirstChild("TabBtn") and tab:FindFirstChild("TabBtn").BackgroundColor3 == Color3.fromRGB(225, 0, 0) then
-				tab:FindFirstChild("TabBtn").BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			if tab:IsA("Frame") and tab:FindFirstChild("TabTextBox") and tab:FindFirstChild("TabTextBox").BackgroundColor3 == Color3.fromRGB(225, 0, 0) then
+				tab:FindFirstChild("TabTextBox").BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+				tab.Active = false
 			end
 		end
 		for i, source in pairs(ScrollFrame:GetChildren()) do
@@ -2470,7 +2573,17 @@ function AddScript()
 		end
 		TabBtn.BackgroundColor3 = Color3.fromRGB(225, 0, 0)
 		Source.Visible = true
+		TabTextBox.Active = true
 	end)
+	
+	TabTextBox.Name = "TabTextBox"
+	TabTextBox.Size = UDim2.new(0, 60, 0, 20)
+	TabTextBox.Text = Language.Tab .. Num
+	TabTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TabTextBox.TextScaled = true
+	TabTextBox.Active = false
+	TabTextBox.BorderSizePixel = 0
+	TabTextBox.BackgroundColor3 = Color3.fromRGB(225, 0, 0)
 	
 	Close.Name = "Close"
 	Close.Size = UDim2.new(0, 20, 0, 20)
@@ -2500,7 +2613,7 @@ function AddScript()
 	Source.BackgroundTransparency = 1
 	Source.Parent = ScrollFrame
 	Source.Size = UDim2.new(0, 2020, 0, 10000)
-	Source.Text = "--- " .. Language.Tab .. ": " .. Num .. '\n--- local functions | Plrs | Plr | Chr | Ws | Bp | CGui | PlrGui\n--- Functions : CheckScriptsInChr() | CheckToolScripts () | Clip("Text") | calculate("stringNumbers") | getHie(Object) | Replace("This", "ToThis") | Fling("Target Name") | Executes(Num, Source) | Output(Object/"Text")\n\n'
+	Source.Text = "--- " .. Language.Tab .. ": " .. Num .. '\n--- local functions | Plrs | Plr | Chr | Ws | Bp | CGui | PlrGui\n--- Functions : CheckScriptsInChr() | CheckToolScripts () | Clip("Text") | calculate("stringNumbers") | getHie(Object) | Replace("This", "ToThis") | Fling("Target Name") | Executes(Num, Source) | Output(String or "Text")\n\n'
 	Source.PlaceholderText = "Paste Script Here"
 	Source.PlaceholderColor3 = Color3.fromRGB(255, 0, 0)
 	Source.TextScaled = false
@@ -2671,7 +2784,7 @@ Execute.MouseButton1Click:Connect(function()
 		wait(0.5)
 		Execute.Text = Language.Execute
 		warn(result)
-		Output(tostring(result), Language.Error)
+		Output2(tostring(result), Language.Error)
 	end
 end)
 	
@@ -2978,50 +3091,57 @@ end
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/RedZenXYZ/RedHub/main/Red_GuiScript"))()
 ---+-------------------------+---
 
-function Output(Input, Name)
-	if Name ~= nil then
-		local function callback(Text)
-			if Text == "Copy" then
-				setclipboard(tostring(Input))
-			elseif Text == ("Nvm.") then
-				--- Close
-			end
+function Output2(Input, Name)
+	local function callback(Text)
+		if Text == "Copy" then
+			setclipboard(tostring(Input))
+		elseif Text == ("Nvm.") then
+			--- Close
 		end
-		
-		local NotificationBindable = Instance.new("BindableFunction")
-		NotificationBindable.OnInvoke = callback
-		
-		game.StarterGui:SetCore("SendNotification",
-		{
-			Title = Name;
-			Text = ("[" .. tostring(Input) .. "]");
-			Duration = 5;
-			Button1 = "Copy";
-			Button2 = "Nvm.";
-			Callback = NotificationBindable;
-		})
-	else
-		local function callback(Text)
-			if Text == "Copy" then
-				setclipboard(tostring(Input))
-			elseif Text == ("Nvm.") then
-				--- Close
-			end
-		end
-		
-		local NotificationBindable = Instance.new("BindableFunction")
-		NotificationBindable.OnInvoke = callback
-		
-		game.StarterGui:SetCore("SendNotification",
-		{
-			Title = "Output";
-			Text = ("[" .. tostring(Input) .. "]");
-			Duration = 5;
-			Button1 = "Copy";
-			Button2 = "Nvm.";
-			Callback = NotificationBindable;
-		})
 	end
+	
+	local NotificationBindable = Instance.new("BindableFunction")
+	NotificationBindable.OnInvoke = callback
+	
+	game.StarterGui:SetCore("SendNotification",
+	{
+		Title = Name;
+		Text = ("[" .. tostring(Input) .. "]");
+		Duration = 5;
+		Button1 = "Copy";
+		Button2 = "Nvm.";
+		Callback = NotificationBindable;
+	})
+end
+
+function Output(...)
+	local Input = {...}
+	local texts
+	
+	for _,text in pairs(Input) do
+		texts = texts .. tostring(text)
+	end
+	
+	local function callback(Text)
+		if Text == "Copy" then
+			setclipboard(tostring(Input))
+		elseif Text == ("Nvm.") then
+			--- Close
+		end
+	end
+	
+	local NotificationBindable = Instance.new("BindableFunction")
+	NotificationBindable.OnInvoke = callback
+	
+	game.StarterGui:SetCore("SendNotification",
+	{
+		Title = "Output";
+		Text = ("[" .. texts .. "]");
+		Duration = 5;
+		Button1 = "Copy";
+		Button2 = "Nvm.";
+		Callback = NotificationBindable;
+	})
 end
 
 function GetPlayersTeam()
@@ -3043,7 +3163,7 @@ function GetUnBlockingPlayers(Check, Pos)
 		players = game.Players:GetPlayers()
 	end
 	
-	local LocalCharacter = game:GetService("Players").LocalPlayer.Character
+	local LocalCharacter = player.Character
 	local Players = {}
 	for _, plr in pairs(players) do
 		if plr ~= player and plr.Character and plr.Character:FindFirstChildOfClass("Humanoid") and plr.Character:FindFirstChildOfClass("Humanoid").Health ~= 0 then
@@ -3099,30 +3219,30 @@ function GetPlayer(String, Information)
 	end
 	local players = {}
 	if Info["raycasting"] == true and Info["team"] == true then
-		players1 = GetUnBlockingPlayers(true, Info["position"])
+		local players1 = GetUnBlockingPlayers(true, Info["position"])
 		for i, v in pairs(players1) do
 			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
 				table.insert(players, v)
 			end
 		end
 	elseif Info["raycasting"] == true and Info["team"] == false then
-		players1 = GetUnBlockingPlayers(false, Info["position"])
+		local players1 = GetUnBlockingPlayers(false, Info["position"])
 		for i, v in pairs(players1) do
 			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
 				table.insert(players, v)
 			end
 		end
 	elseif Info["team"] == true and Info["raycasting"] == false then
-		players1 = GetPlayersTeam()
+		local players1 = GetPlayersTeam()
 		for i, v in pairs(players1) do
 			if (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
 				table.insert(players, v)
 			end
 		end
 	else
-		players1 = game:GetService("Players"):GetPlayers()
+		local players1 = game:GetService("Players"):GetPlayers()
 		for i, v in pairs(players1) do
-			if plr.Character and plr.Character:FindFirstChildOfClass("Humanoid") and plr.Character:FindFirstChildOfClass("Humanoid").Health ~= 0 and (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
+			if v.Character and v.Character:FindFirstChildOfClass("Humanoid") and v.Character:FindFirstChildOfClass("Humanoid").Health ~= 0 and (game.Players.LocalPlayer.Character.PrimaryPart.Position - v.Character.PrimaryPart.Position).magnitude <= Info["distance"] then
 				table.insert(players, v)
 			end
 		end
