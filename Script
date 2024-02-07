@@ -2580,6 +2580,7 @@ function AddScript()
 	TabTextBox.Name = "TabTextBox"
 	TabTextBox.Size = UDim2.new(0, 60, 0, 20)
 	TabTextBox.Text = Language.Tab .. Num
+	TabTextBox.TextSize = 15
 	TabTextBox.ClearTextOnFocus = false
 	TabTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 	TabTextBox.TextScaled = true
