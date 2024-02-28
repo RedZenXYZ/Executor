@@ -3127,7 +3127,7 @@ function Output(...)
 	
 	local function callback(Text)
 		if Text == "Copy" then
-			setclipboard(tostring(Input))
+			setclipboard(texts)
 		elseif Text == ("Nvm.") then
 			--- Close
 		end
