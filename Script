@@ -3296,9 +3296,7 @@ function GetPlayer(String, Information)
 				end
 			end
 		end
-		if closestPlayer then
-			table.insert(Found, closestPlayer)
-		end
+		table.insert(Found, closestPlayer)
 	else
 		for i,v in pairs(players) do
 			if v.Name:lower():sub(1, #String) == String:lower() or v.DisplayName:lower():sub(1, #String) == String:lower() then
